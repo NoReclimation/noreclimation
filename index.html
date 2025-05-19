@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supported Games | Reclaimed Servers</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Reclaimed Servers</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/supported-games">Supported Games</a>
+      <a href="/contact">Contact</a>
+      <a href="/faq">FAQ</a>
+      <a href="/news">News</a>
+      <a href="/dashboard">Dashboard</a>
+    </nav>
+    <div class="header-icons">
+      <button id="dark-mode-toggle">🌙</button>
+      <a href="https://discord.gg/yourserver" target="_blank">💬</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Supported Games</h1>
+    <p>Choose your game and configure your server</p>
+  </section>
+
+  <!-- Game Cards Grid -->
+  <section class="game-grid">
+    <div class="game-card">
+      <img src="game1.png" alt="Game 1 Logo" />
+      <h2>Game Title 1</h2>
+      <p>Short description of the game here.</p>
+      <button class="order-btn" onclick="openOrderPanel('game1')">Order Server</button>
+      <div class="tags">
+        <span>PvP</span><span>Mod Support</span><span>24/7 Uptime</span>
+      </div>
+    </div>
+    <!-- Repeat .game-card for each supported game -->
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Reclaimed Servers. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function openOrderPanel(gameId) {
+      // Placeholder function – you can hook this to modal or inline panel
+      alert('Open order panel for ' + gameId);
+    }
+  </script>
+</body>
+</html>
