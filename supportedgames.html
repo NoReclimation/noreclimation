@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supported Games | Reclaimed Servers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+
+    .header-icons button,
+    .header-icons a {
+      background: none;
+      border: none;
+      color: #fff;
+      margin-left: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background-color: #222;
+      color: #fff;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .game-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-mode .game-card {
+      background: #1f1f1f;
+      color: #e0e0e0;
+    }
+
+    .game-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .game-card h2 {
+      margin: 1rem 0 0.5rem;
+    }
+
+    .game-card p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .order-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .tags {
+      margin-top: 1rem;
+    }
+
+    .tags span {
+      display: inline-block;
+      background-color: #eee;
+      padding: 0.25rem 0.5rem;
+      margin: 0.25rem;
+      border-radius: 3px;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1e1e1e;
+      color: #fff;
+      margin-top: 2rem;
+    }
+
+    .order-panel {
+      display: none;
+      background: #fff;
+      padding: 1rem;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    body.dark-mode .order-panel {
+      background: #2a2a2a;
+      border-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Reclaimed Servers</div>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/supportedgames.html">Supported Games</a>
+      <a href="/contactpage.html">Contact</a>
+      <a href="/news.html">News</a>
+      <a href="#">Dashboard</a>
+    </nav>
+    <div class="header-icons">
+      <button id="dark-mode-toggle">🌙</button>
+      <a href="https://discord.gg/yourserver" target="_blank">💬</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Supported Games</h1>
+    <p>Choose your game and configure your server</p>
+  </section>
+
+  <!-- Game Cards Grid -->
+  <section class="game-grid" id="game-grid">
+    <!-- Game cards will be injected here by JavaScript -->
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Reclaimed Servers. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('dark-mode-toggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    function openOrderPanel(id) {
+      const panel = document.getElementById(`order-panel-${id}`);
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function createGameCard(i) {
+      return `
+      <div class="game-card">
+        <img src="game${i}.png" alt="Game ${i} Logo" />
+        <h2>Game Title ${i}</h2>
+        <p>Short description of the game here.</p>
+        <button class="order-btn" onclick="openOrderPanel(${i})">Order Server</button>
+        <div class="tags">
+          <span>PvP</span><span>Mod Support</span><span>24/7 Uptime</span>
+        </div>
+        <div class="order-panel" id="order-panel-${i}">
+          <h3>Configure Your Server</h3>
+          <label>RAM: <span id="ram-value-${i}">16</span> GB</label><br />
+          <input type="range" min="8" max="32" value="16" step="1" oninput="updatePrice(${i}, this.value)" />
+          <p>Price: $<span id="price-display-${i}">20.00</span></p>
+          <button class="order-btn">Checkout</button>
+        </div>
+      </div>`;
+    }
+
+    function updatePrice(i, value) {
+      const ram = parseInt(value);
+      document.getElementById(`ram-value-${i}`).textContent = ram;
+      document.getElementById(`price-display-${i}`).textContent = (ram * 1.25).toFixed(2);
+    }
+
+    const grid = document.getElementById('game-grid');
+    for (let i = 1; i <= 22; i++) {
+      grid.innerHTML += createGameCard(i);
+    }
+  </script>
+</body>
+</html>

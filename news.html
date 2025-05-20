@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News & Updates</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0d0d0d;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background-color: #1a1a1a;
+      border-bottom: 1px solid #333;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: white;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subheading {
+      color: #aaa;
+      margin-bottom: 2rem;
+    }
+
+    .news-filters {
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+      text-align: center;
+    }
+
+    .news-filters input {
+      width: 60%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: none;
+      background: #1a1a1a;
+      color: white;
+    }
+
+    .categories button {
+      margin: 0.3rem;
+      padding: 0.4rem 1rem;
+      background-color: #333;
+      border: none;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .categories button:hover {
+      background-color: #555;
+    }
+
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .news-card {
+      background-color: #1a1a1a;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .news-card .date {
+      color: #888;
+      font-size: 0.9rem;
+      margin: 0.2rem 0 1rem;
+    }
+
+    .news-card button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .news-card button:hover {
+      background-color: #555;
+    }
+
+    .expanded {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      color: #ccc;
+      padding: 0 0;
+    }
+
+    .expanded.show {
+      max-height: 200px;
+      padding-top: 1rem;
+    }
+
+    .pagination {
+      margin-top: 2rem;
+    }
+
+    .pagination button {
+      background-color: #333;
+      color: white;
+      border: none;
+      margin: 0 5px;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .pagination button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Reclaimed Servers</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="games.html">Supported Games</a>
+      <a href="contactpage.html">Contact</a>
+      <a href="#">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Latest News & Updates</h1>
+    <p class="subheading">Stay informed with our latest announcements, features, and server updates.</p>
+
+    <section class="news-filters">
+      <input type="text" id="searchInput" placeholder="Search news..." oninput="filterNews()" />
+      <div class="categories">
+        <button onclick="filterByCategory('all')">All</button>
+        <button onclick="filterByCategory('update')">Updates</button>
+        <button onclick="filterByCategory('maintenance')">Maintenance</button>
+        <button onclick="filterByCategory('feature')">Features</button>
+      </div>
+    </section>
+
+    <section class="news-list" id="newsList"></section>
+
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <script>
+    const isAdmin = false;
+    const postsPerPage = 4;
+    let currentPage = 1;
+    let currentCategory = 'all';
+    let filteredPosts = [];
+
+    const posts = [
+  {
+    title: "Test Post 1",
+    date: "May 1, 2025",
+    summary: "Summary for test post 1.",
+    content: "Expanded content for test post 1.",
+    category: "feature"
+  },
+  {
+    title: "Test Post 2",
+    date: "May 2, 2025",
+    summary: "Summary for test post 2.",
+    content: "Expanded content for test post 2.",
+    category: "maintenance"
+  },
+  {
+    title: "Test Post 3",
+    date: "May 3, 2025",
+    summary: "Summary for test post 3.",
+    content: "Expanded content for test post 3.",
+    category: "update"
+  },
+  {
+    title: "Test Post 4",
+    date: "May 4, 2025",
+    summary: "Summary for test post 4.",
+    content: "Expanded content for test post 4.",
+    category: "update"
+  },
+  {
+    title: "Test Post 5",
+    date: "May 5, 2025",
+    summary: "Summary for test post 5.",
+    content: "Expanded content for test post 5.",
+    category: "update"
+  },
+  {
+    title: "Test Post 6",
+    date: "May 6, 2025",
+    summary: "Summary for test post 6.",
+    content: "Expanded content for test post 6.",
+    category: "feature"
+  }
+];
+
+    function toggleExpand(btn) {
+      document.querySelectorAll('.expanded').forEach(e => {
+        if (e !== btn.nextElementSibling) {
+          e.classList.remove('show');
+          e.previousElementSibling.textContent = 'Read More';
+        }
+      });
+
+      const content = btn.nextElementSibling;
+      const isOpen = content.classList.contains('show');
+      content.classList.toggle('show', !isOpen);
+      btn.textContent = isOpen ? 'Read More' : 'Show Less';
+    }
+
+    function filterByCategory(category) {
+      currentCategory = category;
+      currentPage = 1;
+      renderPosts();
+    }
+
+    function filterNews() {
+      currentPage = 1;
+      renderPosts();
+    }
+
+    function renderPosts() {
+      const searchValue = document.getElementById('searchInput').value.toLowerCase();
+      filteredPosts = posts.filter(p =>
+        (currentCategory === 'all' || p.category === currentCategory) &&
+        (p.title.toLowerCase().includes(searchValue) || p.summary.toLowerCase().includes(searchValue) || p.content.toLowerCase().includes(searchValue))
+      );
+
+      const list = document.getElementById('newsList');
+      list.innerHTML = '';
+
+      const start = (currentPage - 1) * postsPerPage;
+      const paginated = filteredPosts.slice(start, start + postsPerPage);
+
+      paginated.forEach(post => {
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.innerHTML = `
+          <h2>${post.title}</h2>
+          <p class="date">${post.date}</p>
+          <p>${post.summary}</p>
+          <button onclick="toggleExpand(this)">Read More</button>
+          <div class="expanded">${post.content}</div>
+        `;
+        list.appendChild(card);
+      });
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+      const container = document.getElementById('pagination');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.onclick = () => {
+          currentPage = i;
+          renderPosts();
+        };
+        if (i === currentPage) {
+          btn.style.fontWeight = 'bold';
+        }
+        container.appendChild(btn);
+      }
+    }
+
+    renderPosts();
+  </script>
+</body>
+</html>
