@@ -1,59 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supported Games | Reclaimed Servers</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reclaimed Servers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+    header, footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #1e1e1e;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    @keyframes slide-bg {
+      from { background-position: 0 0; }
+      to { background-position: -1000px 0; }
+    }
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 4rem 2rem;
+      background-image: url('/mnt/data/9a949c02-676b-4264-9f20-65b9d3fa6cfb.png');
+      background-repeat: repeat-x;
+      background-size: auto 100%;
+      animation: slide-bg 60s linear infinite;
+      z-index: 1;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1;
+    }
+    .hero h1, .hero p, .hero button {
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+    .hero button {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+    }
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      background-color: #1a1a1a;
+    }
+    .features div {
+      text-align: center;
+    }
+    .how-it-works {
+      padding: 2rem;
+      text-align: center;
+    }
+    .how-it-works h2 {
+      margin-bottom: 1rem;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .order-preview {
+      text-align: center;
+      padding: 2rem;
+    }
+    .order-preview button {
+      padding: 0.75rem 1.5rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    footer {
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <div class="logo">Reclaimed Servers</div>
+    <div><strong>Reclaimed Servers</strong></div>
     <nav>
-      <a href="/">Home</a>
-      <a href="/supported-games">Supported Games</a>
-      <a href="/contact">Contact</a>
-      <a href="/faq">FAQ</a>
-      <a href="/news">News</a>
-      <a href="/dashboard">Dashboard</a>
+      <a href="#">Home</a>
+      <a href="#">Supported Games</a>
+      <a href="#">Contact</a>
+      <a href="#">News</a>
+      <a href="#">Dashboard</a>
     </nav>
-    <div class="header-icons">
-      <button id="dark-mode-toggle">🌙</button>
-      <a href="https://discord.gg/yourserver" target="_blank">💬</a>
-    </div>
   </header>
 
-  <!-- Hero -->
   <section class="hero">
-    <h1>Supported Games</h1>
-    <p>Choose your game and configure your server</p>
+    <h1>Reliable, Affordable Game Server Hosting</h1>
+    <p>Choose your game and customize your server plan</p>
+    <button>Get Started</button>
   </section>
 
-  <!-- Game Cards Grid -->
-  <section class="game-grid">
-    <div class="game-card">
-      <img src="game1.png" alt="Game 1 Logo" />
-      <h2>Game Title 1</h2>
-      <p>Short description of the game here.</p>
-      <button class="order-btn" onclick="openOrderPanel('game1')">Order Server</button>
-      <div class="tags">
-        <span>PvP</span><span>Mod Support</span><span>24/7 Uptime</span>
-      </div>
+  <section class="features">
+    <div>🔧 Easy Setup</div>
+    <div>🛡️ DDoS Protection</div>
+    <div>💵 Simple Pricing</div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div>1. Select Game & RAM</div>
+      <div>2. Pay Securely</div>
+      <div>3. Server Setup Begins</div>
+      <div>4. Get Server Credentials</div>
+      <div>5. Enjoy Your New Game Server 🎮</div>
     </div>
-    <!-- Repeat .game-card for each supported game -->
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Reclaimed Servers. All rights reserved.</p>
-  </footer>
+  <section class="order-preview">
+    <div>▓ Order Panel with RAM Slider ▓</div>
+    <button>Browse All Supported Games</button>
+  </section>
 
-  <script>
-    function openOrderPanel(gameId) {
-      // Placeholder function – you can hook this to modal or inline panel
-      alert('Open order panel for ' + gameId);
-    }
-  </script>
+  <footer>
+    <div>
+      Home | Supported Games | Dashboard
+    </div>
+    <div>
+      © Reclaimed Servers | Dark Mode
+    </div>
+  </footer>
 </body>
 </html>
