@@ -156,7 +156,7 @@
       const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       grid.innerHTML += `
         <div class="game-card">
-          <img src="images/${slug}.png" alt="${game} Logo" />
+          <img src="images/${slug}.png" alt="${game} Logo" onerror="this.onerror=null;this.src='images/placeholder.png';" />
           <h2>${game}</h2>
           <p>Short description of ${game}.</p>
           <a href="/order/${slug}.html" class="order-btn">Order Server</a>
