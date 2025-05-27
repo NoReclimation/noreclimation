@@ -175,27 +175,62 @@
     "v-rising": "Rise as a vampire and build your empire in real time."
   };
 
+  const gameTags = {
+    "aska": ["Mod Support"],
+    "avorion": ["Mod Support"],
+    "conan-exiles": ["PvP", "Mod Support"],
+    "eco": ["Mod Support"],
+    "empyrion": ["PvP", "Mod Support"],
+    "enshrouded": ["PvP"],
+    "icarus": [],
+    "night-of-the-dead": [],
+    "minecraft": ["PvP", "Mod Support"],
+    "palworld": ["Mod Support"],
+    "project-zomboid": ["PvP", "Mod Support"],
+    "rust": ["PvP", "Mod Support"],
+    "satisfactory": ["Mod Support"],
+    "space-engineers": ["Mod Support"],
+    "stationeers": ["Mod Support"],
+    "subsistence": [],
+    "sunkenland": ["PvP"],
+    "terraria": ["PvP", "Mod Support"],
+    "unturned": ["PvP", "Mod Support"],
+    "valhiem": ["PvP", "Mod Support"],
+    "v-rising": ["PvP", "Mod Support"]
+  };
+
   const grid = document.getElementById('game-grid');
+
   games.forEach((game) => {
     const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
     grid.innerHTML += `
       <div class="game-card">
         <img src="images/${slug}.png" alt="${game} Logo" onerror="this.src='images/placeholder.png'" />
         <h2>${game}</h2>
         <p id="desc-${slug}">Loading...</p>
         <a href="/order/${slug}.html" class="order-btn">Order Server</a>
-        <div class="tags">
-          <span>PvP</span><span>Mod Support</span><span>24/7 Uptime</span>
-        </div>
+        <div class="tags" id="tags-${slug}"></div>
       </div>
     `;
   });
 
   games.forEach((game) => {
     const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const desc = descriptions[slug] || 'Game server hosting made simple.';
+
+    // Set description
     const el = document.getElementById(`desc-${slug}`);
-    if (el) el.textContent = desc;
+    if (el) el.textContent = descriptions[slug] || 'Game server hosting made simple.';
+
+    // Set tags
+    const tagWrap = document.getElementById(`tags-${slug}`);
+    const tags = (gameTags[slug] || []);
+    tags.push("24/7 Uptime");
+    tags.forEach(tag => {
+      const span = document.createElement("span");
+      span.textContent = tag;
+      tagWrap.appendChild(span);
+    });
   });
 </script>
 </body>
