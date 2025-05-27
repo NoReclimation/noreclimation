@@ -211,18 +211,19 @@
   const grid = document.getElementById('game-grid');
 
   games.forEach((game) => {
-    const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
-    grid.innerHTML += `
-      <div class="game-card">
-        <img src="images/${slug}.png" alt="${game} Logo" onerror="this.src='images/placeholder.png'" />
-        <h2>${game}</h2>
-        <p id="desc-${slug}">Loading...</p>
-        <a href="/games/order/${slug}.html" class="order-btn">Order Server</a>
-        <div class="tags" id="tags-${slug}"></div>
-      </div>
-    `;
-  });
+  grid.innerHTML += `
+    <div class="game-card">
+      <img src="images/${slug}.png" alt="${game} Logo" onerror="this.src='images/placeholder.png'" />
+      <h2>${game}</h2>
+      <p id="desc-${slug}">Loading...</p>
+      <a href="/game/${slug}.html" class="order-btn">Order Server</a>
+      <div class="tags" id="tags-${slug}"></div>
+    </div>
+  `;
+});
+
 
   games.forEach((game) => {
     const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
