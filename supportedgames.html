@@ -218,7 +218,7 @@
         <img src="images/${slug}.png" alt="${game} Logo" onerror="this.src='images/placeholder.png'" />
         <h2>${game}</h2>
         <p id="desc-${slug}">Loading...</p>
-        <a href="/order/${slug}.html" class="order-btn">Order Server</a>
+        <a href="/games/order/${slug}.html" class="order-btn">Order Server</a>
         <div class="tags" id="tags-${slug}"></div>
       </div>
     `;
@@ -227,11 +227,9 @@
   games.forEach((game) => {
     const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
-    // Set description
     const el = document.getElementById(`desc-${slug}`);
     if (el) el.textContent = descriptions[slug] || 'Game server hosting made simple.';
 
-    // Set tags
     const tagWrap = document.getElementById(`tags-${slug}`);
     const tags = (gameTags[slug] || []);
     tags.push("24/7 Uptime");
