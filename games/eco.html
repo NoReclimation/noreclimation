@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco | Reclaimed Servers</title>
+  <style>
+    body { background-color: #111; color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+    header, footer { background-color: #1a1a1a; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    header .title { font-weight: 700; font-size: 1.2rem; }
+    nav ul { list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0; }
+    nav ul li a { color: #fff; text-decoration: none; font-weight: 600; }
+    nav ul li a.active { color: #0af; }
+    .content { max-width: 1000px; margin: 0 auto; padding: 2rem; text-align: center; }
+    .content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .description { font-size: 1.1rem; margin-bottom: 2rem; }
+    .game-banner { width: 100%; max-width: 800px; height: auto; margin-bottom: 2rem; border-radius: 8px; }
+    .btn { background-color: #0af; color: #fff; padding: 0.75rem 1.5rem; border-radius: 5px; text-decoration: none; font-weight: 600; }
+    .trailer { text-align: center; max-width: 800px; margin: 2rem auto; }
+    .ram-table { margin: 2rem auto; text-align: left; border-collapse: collapse; width: 100%; max-width: 600px; }
+    .ram-table th, .ram-table td { border: 1px solid #444; padding: 0.75rem; }
+    .ram-table th { background-color: #222; }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("/prices.json")
+        .then(res => res.json())
+        .then(data => {
+          const page = window.location.pathname.split("/").pop().replace(".html", "");
+          const price = data[page]?.g2a;
+          if (price) {
+            const target = document.getElementById(`${page}-price`);
+            if (target) target.textContent = `$${price.toFixed(2)}`;
+          }
+        });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div class="title">Reclaimed Servers</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="supported.html" class="active">Supported Games</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="content">
+    <div class="game-info" style="margin-bottom: 2rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <h2 style="font-size: 1.8rem; color: #0af; margin-bottom: 1rem;">Game Details</h2>
+      <div style="background-color: #1a1a1a; padding: 1rem 2rem; border-radius: 8px; display: inline-block; text-align: left;">
+        <p><strong>🎮 Genre:</strong> Simulation, Building, Multiplayer</p>
+        <p><strong>🛠 Developer:</strong> Strange Loop Games</p>
+        <p><strong>🏢 Publisher:</strong> Strange Loop Games</p>
+        <p><strong>📅 Release Date:</strong> February 6, 2018 (Early Access)</p>
+        <p><strong>🌐 Official Site:</strong> <a href="https://www.strangeloopgames.com/eco/" target="_blank" style="color: #0af;">strangeloopgames.com</a></p>
+      </div>
+    </div>
+
+    <div class="features" style="margin-bottom: 2rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <h2 style="font-size: 1.8rem; color: #0af; margin-bottom: 1rem;">Key Features</h2>
+      <div style="background-color: #1a1a1a; padding: 1rem 2rem; border-radius: 8px; display: inline-block; text-align: left;">
+        <ul style="list-style-type: '✔ '; padding-left: 1.2rem;">
+          <li>Collaborate to build a civilization and avoid environmental disaster</li>
+          <li>Deep economy, law, government, and ecology systems</li>
+          <li>Persistent multiplayer world with mod support</li>
+          <li>Highly customizable world generation and gameplay settings</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 2rem auto;">
+      <h1>Eco</h1>
+      <p class="description">Create a sustainable civilization in a simulated ecosystem.</p>
+      <img src="assets/games/eco.jpg" alt="Eco Banner" class="game-banner" />
+      <a href="order.html?game=eco" class="btn">Order Server</a>
+    </div>
+
+    <div class="pricing" style="text-align: center; max-width: 800px; margin: 2rem auto;">
+      <h2 style="font-size: 1.8rem; color: #fff; margin-bottom: 1rem;">Buy Eco</h2>
+      <div style="font-size: 1.1rem;">
+        <strong>Eco:</strong> <span id="eco-price">Loading...</span> –
+        <a href="#" target="_blank" style="color: #0af; font-weight: bold; text-decoration: none;">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="trailer">
+      <h2>Game Trailer</h2>
+      <iframe width="800" height="450" style="display: block; margin: 0 auto; max-width: 100%; border: none; border-radius: 8px;" src="https://www.youtube.com/embed/d6zvBdUDMPY?vq=hd1080" allowfullscreen></iframe>
+    </div>
+
+    <div class="ram-presets">
+      <h2>Recommended RAM Presets</h2>
+      <table class="ram-table">
+        <tr><th>Player Count</th><th>Recommended RAM</th></tr>
+        <tr><td>1–4 Players</td><td>8 GB</td></tr>
+        <tr><td>5–10 Players</td><td>10 GB</td></tr>
+        <tr><td>11+ Players</td><td>12+ GB</td></tr>
+      </table>
+    </div>
+
+    <div class="notes">
+      <h2>Notes & Performance Tips</h2>
+      <ul>
+        <li>Eco is CPU-heavy — worlds with many players or mods need extra RAM.</li>
+        <li>Backups and autosaves can spike memory usage during peak times.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Reclaimed Servers | Dark Mode</p>
+  </footer>
+</body>
+</html>
