@@ -145,11 +145,35 @@
 
   <script>
     const games = [
-      "ASKA", "Avorion", "Conan Exiles", "Eco", "Empyrion", "Enshrouded",
-      "Icarus", "Night of the Dead", "Minecraft", "Palworld", "Project Zomboid",
-      "Rust", "Satisfactory", "Space Engineers", "Stationeers", "Subsistence",
-      "Sunkenland", "Terraria", "Unturned", "Valhiem", "V Rising"
-    ];
+  "ASKA", "Avorion", "Conan Exiles", "Eco", "Empyrion", "Enshrouded",
+  "Icarus", "Night of the Dead", "Minecraft", "Palworld", "Project Zomboid",
+  "Rust", "Satisfactory", "Space Engineers", "Stationeers", "Subsistence",
+  "Sunkenland", "Terraria", "Unturned", "Valhiem", "V Rising"
+];
+
+const descriptions = {
+  "aska": "Build and survive in a Viking world with friends.",
+  "avorion": "Explore, build, and fight in a procedurally generated galaxy.",
+  "conan-exiles": "Survive brutal lands and build your kingdom in Conan’s world.",
+  "eco": "Shape a civilization in a fully simulated ecosystem.",
+  "empyrion": "A 3D open world space survival adventure.",
+  "enshrouded": "Survive the fog and uncover a cursed world.",
+  "icarus": "Co-op survival on an alien planet with deep resource crafting.",
+  "night-of-the-dead": "Fight zombies and build fortifications to survive nights.",
+  "minecraft": "The blocky classic — mine, craft, explore, survive.",
+  "palworld": "Pokemon meets guns in this bizarre survival world.",
+  "project-zomboid": "The zombie survival game with no hope of rescue.",
+  "rust": "Hardcore PvP survival with raiding and base building.",
+  "satisfactory": "Build massive factories on an alien planet.",
+  "space-engineers": "Engineer, build, and explore in space and planets.",
+  "stationeers": "Complex atmospheric and engineering survival sim.",
+  "subsistence": "Struggle for survival in a hostile environment.",
+  "sunkenland": "Waterworld-style post-apocalyptic ocean survival.",
+  "terraria": "2D action-packed sandbox full of adventure and bosses.",
+  "unturned": "Free-to-play zombie survival sandbox.",
+  "valhiem": "Explore a Norse world, defeat bosses, build epic bases.",
+  "v-rising": "Become a vampire lord, rebuild your castle, and survive."
+};
 
     const grid = document.getElementById('game-grid');
     games.forEach((game, index) => {
@@ -158,7 +182,7 @@
         <div class="game-card">
           <img src="images/${slug}.png" alt="${game} Logo" onerror="this.onerror=null;this.src='images/placeholder.png';" />
           <h2>${game}</h2>
-          <p>Short description of ${game}.</p>
+          <p>\${descriptions[slug] || 'Game server hosting made simple.'}</p>
           <a href="/order/${slug}.html" class="order-btn">Order Server</a>
           <div class="tags">
             <span>PvP</span><span>Mod Support</span><span>24/7 Uptime</span>
