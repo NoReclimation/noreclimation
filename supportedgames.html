@@ -99,6 +99,8 @@
       margin-top: 1rem;
       cursor: pointer;
       border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .tags {
@@ -121,20 +123,6 @@
       color: #fff;
       margin-top: 2rem;
     }
-
-    .order-panel {
-      display: none;
-      background: #fff;
-      padding: 1rem;
-      margin-top: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    body.dark-mode .order-panel {
-      background: #2a2a2a;
-      border-color: #444;
-    }
   </style>
 </head>
 <body>
@@ -142,11 +130,12 @@
   <header>
     <div class="logo">Reclaimed Servers</div>
     <nav>
-      <a href="/index.html">Home</a>
-      <a href="/supportedgames.html">Supported Games</a>
-      <a href="/contactpage.html">Contact</a>
-      <a href="/news.html">News</a>
-      <a href="https://panel.reclaimed-servers.com/">Dashboard</a>
+      <a href="/">Home</a>
+      <a href="/supported-games">Supported Games</a>
+      <a href="/contact">Contact</a>
+      <a href="/faq">FAQ</a>
+      <a href="/news">News</a>
+      <a href="/dashboard">Dashboard</a>
     </nav>
     <div class="header-icons">
       <button id="dark-mode-toggle">🌙</button>
@@ -171,46 +160,33 @@
   </footer>
 
   <script>
-    const toggle = document.getElementById('dark-mode-toggle');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-    });
+  const toggle = document.getElementById('dark-mode-toggle');
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+  });
 
-    function openOrderPanel(id) {
-      const panel = document.getElementById(`order-panel-${id}`);
-      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-    }
+  const games = [
+    "ASKA", "Avorion", "Conan Exiles", "Eco", "Empyrion", "Enshrouded",
+    "Icarus", "Night of the Dead", "Minecraft", "Palworld", "Project Zomboid",
+    "Rust", "Satisfactory", "Space Engineers", "Stationeers", "Subsistence",
+    "Sunkenland", "Terraria", "Unturned", "Valhiem", "V Rising"
+  ];
 
-    function createGameCard(i) {
-      return `
+  const grid = document.getElementById('game-grid');
+  games.forEach((game, index) => {
+    const slug = game.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    grid.innerHTML += `
       <div class="game-card">
-        <img src="game${i}.png" alt="Game ${i} Logo" />
-        <h2>Game Title ${i}</h2>
-        <p>Short description of the game here.</p>
-        <button class="order-btn" onclick="openOrderPanel(${i})">Order Server</button>
+        <img src="images/${slug}.png" alt="${game} Logo" />
+        <h2>${game}</h2>
+        <p>Short description of ${game}.</p>
+        <a href="/order/${slug}.html" class="order-btn">Order Server</a>
         <div class="tags">
           <span>PvP</span><span>Mod Support</span><span>24/7 Uptime</span>
         </div>
-        <div class="order-panel" id="order-panel-${i}">
-          <h3>Configure Your Server</h3>
-          <label>RAM: <span id="ram-value-${i}">16</span> GB</label><br />
-          <input type="range" min="8" max="32" value="16" step="1" oninput="updatePrice(${i}, this.value)" />
-          <p>Price: $<span id="price-display-${i}">20.00</span></p>
-          <button class="order-btn">Checkout</button>
-        </div>
-      </div>`;
-    }
-
-    function updatePrice(i, value) {
-      const ram = parseInt(value);
-      document.getElementById(`ram-value-${i}`).textContent = ram;
-      document.getElementById(`price-display-${i}`).textContent = (ram * 1.25).toFixed(2);
-    }
-
-    const grid = document.getElementById('game-grid');
-    for (let i = 1; i <= 22; i++) {
-      grid.innerHTML += createGameCard(i);
-    }
-  </script>
+      </div>
+    `;
+  });
+</script>
 </body>
 </html>
